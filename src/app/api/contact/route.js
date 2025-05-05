@@ -16,7 +16,7 @@ export async function POST(request) {
     });
 
     const mailOptions = {
-      from: `"Portfolio Contact Form" <${process.env.SMTP_USER}>`,
+      from: `"Llywellyn Labs" <${process.env.SMTP_USER}>`,
       to: process.env.CONTACT_EMAIL,
       subject: `Portfolio Contact: ${subject || 'New Message'}`,
       text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
