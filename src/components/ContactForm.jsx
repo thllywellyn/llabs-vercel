@@ -9,9 +9,9 @@ export default function ContactForm() {
     subject: '',
     message: ''
   });
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [status, setStatus] = useState('idle');
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -19,7 +19,7 @@ export default function ContactForm() {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('loading');
 
@@ -32,16 +32,13 @@ export default function ContactForm() {
         body: JSON.stringify(formData),
       });
 
-      if (!response.ok) throw new Error('Failed to send message');
+      if (!response.ok) throw new Error();
 
       setStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
-      
-      // Reset success message after 3 seconds
       setTimeout(() => setStatus('idle'), 3000);
-    } catch (_error) { // Changed to _error to indicate intentionally unused parameter
+    } catch {
       setStatus('error');
-      // Reset error message after 3 seconds
       setTimeout(() => setStatus('idle'), 3000);
     }
   };
