@@ -1,17 +1,6 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
-export async function OPTIONS() {
-  return NextResponse.json(null, {
-    status: 204,
-    headers: {
-      'Access-Control-Allow-Origin': 'https://lsanalab.xyz',
-      'Access-Control-Allow-Methods': 'POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type',
-    },
-  });
-}
-
 export async function POST(request) {
   try {
     const { name, email, subject, message } = await request.json();
@@ -45,23 +34,13 @@ export async function POST(request) {
 
     return NextResponse.json(
       { message: "Email sent successfully" },
-      {
-        status: 200,
-        headers: {
-          'Access-Control-Allow-Origin': 'https://lsanalab.xyz',
-        },
-      }
+      { status: 200 }
     );
   } catch (error) {
     console.error('Error sending email:', error);
     return NextResponse.json(
       { error: "Failed to send email" },
-      {
-        status: 500,
-        headers: {
-          'Access-Control-Allow-Origin': 'https://lsanalab.xyz',
-        },
-      }
+      { status: 500 }
     );
   }
 }
