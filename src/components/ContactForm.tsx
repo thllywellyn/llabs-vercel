@@ -39,7 +39,7 @@ export default function ContactForm() {
       
       // Reset success message after 3 seconds
       setTimeout(() => setStatus('idle'), 3000);
-    } catch (error) {
+    } catch (_error) { // Changed to _error to indicate intentionally unused parameter
       setStatus('error');
       // Reset error message after 3 seconds
       setTimeout(() => setStatus('idle'), 3000);
